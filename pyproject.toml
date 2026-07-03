@@ -1,6 +1,6 @@
 [project]
 name = "ai-simple-engine-runtime-diffusers"
-version = "0.0.1"
+version = "0.0.2"
 description = "AI Simple Engine Runtime Diffusers Module"
 authors = [
     {name = "danialcala94", email = "danielalcalavalera@gmail.com"}
@@ -13,8 +13,8 @@ requires-python = ">=3.10,<3.12"
 ai-simple-engine = { version = ">=0.2.6,<1.0.0", optional = false }
 ai-simple-engine-common = { version = ">=0.0.3,<1.0.0", optional = false }
 ai-simple-engine-diffusion = { version = ">=0.0.2,<1.0.0", optional = false }
-transformers = { version = ">=0.0.1,<1.0.0", optional = false }
-diffusers = { version = ">=0.38.0,<1.0.0", optional = false }
+transformers = { version = ">=5.12.1,<9999.0.0", optional = false }
+diffusers = { version = ">=0.38.0,<9999.0.0", optional = false }
 # Optional
 
 [tool.poetry]

@@ -5,7 +5,7 @@ from ai_simple_engine.engine_builder import EngineBuilder
 from ai_simple_engine.plugins.plugin import Plugin
 
 
-class DiffusersRuntimeMusicgenPlugin(
+class DiffusersRuntimePlugin(
     Plugin
 ):
     """
@@ -19,8 +19,6 @@ class DiffusersRuntimeMusicgenPlugin(
         self,
         builder: EngineBuilder
     ):
-        
-
         (
             builder.add_model_loader(LatentDiffusionModelLoader)
         )
@@ -43,27 +41,3 @@ class DiffusersRuntimeMusicgenPlugin(
                 identifier,
                 cls
             )
-        
-        # scheduler_registry.register(
-        #     'euler',
-        #     EulerDiscreteScheduler
-        # )
-
-        # TODO: This below was the 'musicgen'
-        # (
-        #     builder
-        #     .add_model_loader(MusicgenModelLoader())
-        # )
-
-        # """
-        # We obtain the registry that handles the
-        # model executors by the model's family,
-        # and we register our specific model
-        # executor that uses transformers.
-        # """
-        # registry = builder.get_or_add_service(FamilyModelExecutorRegistry)
-
-        # registry.register(
-        #     MUSICGEN_MODEL_FAMILY,
-        #     TransformersMusicgenModelExecutor()
-        # )
