@@ -1,0 +1,11 @@
+build/*
+dist/*
+ai_simple_engine_runtime_diffusers.egg-info/*
+__pycache__
+*.bat
+yta_wip
+test_files/*
+!test.txt
+settings.json
+.vscode
+*.env*

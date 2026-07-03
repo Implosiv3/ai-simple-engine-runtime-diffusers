@@ -1,0 +1,34 @@
+[project]
+name = "ai-simple-engine-runtime-diffusers"
+version = "0.0.1"
+description = "AI Simple Engine Runtime Diffusers Module"
+authors = [
+    {name = "danialcala94", email = "danielalcalavalera@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+
+[tool.poetry.dependencies]
+# Mandatory
+ai-simple-engine = { version = ">=0.2.6,<1.0.0", optional = false }
+ai-simple-engine-common = { version = ">=0.0.3,<1.0.0", optional = false }
+ai-simple-engine-diffusion = { version = ">=0.0.2,<1.0.0", optional = false }
+transformers = { version = ">=0.0.1,<1.0.0", optional = false }
+diffusers = { version = ">=0.38.0,<1.0.0", optional = false }
+# Optional
+
+[tool.poetry]
+packages = [{include = "ai_simple_engine_runtime_diffusers", from = "src"}]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+
+[tool.pytest.ini_options]
+markers = [
+    "mandatory: mandatory tests for release",
+    "additional: exhaustive and demanding tests"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
