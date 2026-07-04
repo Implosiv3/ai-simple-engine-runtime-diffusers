@@ -7,7 +7,7 @@ class TorchNoiseGenerator(
     NoiseGenerator
 ):
 
-    def generate(
+    async def generate(
         self,
         *,
         shape,

@@ -26,14 +26,14 @@ files = [
 
 [[package]]
 name = "ai-simple-engine-diffusion"
-version = "0.0.4"
+version = "0.0.6"
 description = "AI Simple Engine Diffusion Module"
 optional = false
 python-versions = "<3.12,>=3.10"
 groups = ["main"]
 files = [
-    {file = "ai_simple_engine_diffusion-0.0.4-py3-none-any.whl", hash = "sha256:c5587caf973bf273b1c0b7c6e7b2ac7d9da1c2ef2865c7c62660088b7508a32f"},
-    {file = "ai_simple_engine_diffusion-0.0.4.tar.gz", hash = "sha256:f7590d7cfad04de7ebbee49921541c9dabcb8cec5a14c22401917db1efbf979a"},
+    {file = "ai_simple_engine_diffusion-0.0.6-py3-none-any.whl", hash = "sha256:f23aec4411937949e782b039a7f3e5f8bf39b5b5de27235f22737651db0403e3"},
+    {file = "ai_simple_engine_diffusion-0.0.6.tar.gz", hash = "sha256:fe92bf1d5c0c07517c1630f9aff7d67cc82458d0dfdc40d78f01a10a581b398b"},
 ]
 
 [package.dependencies]
@@ -1367,4 +1367,4 @@ type = ["pytest-mypy (>=1.0.1) ; platform_python_implementation != \"PyPy\""]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.12"
-content-hash = "bbbb8374885f2ff723f03bf9a0c0458e3ea2ebccb6e51e67296b9421e5225ef4"
+content-hash = "7c73ba0d093ca03831db24494b3c64732d70873c432ce8533ade3e9ab0d18328"

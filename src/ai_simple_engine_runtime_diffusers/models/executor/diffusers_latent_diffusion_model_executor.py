@@ -26,7 +26,7 @@ class DiffusersLatentDiffusionModelExecutor (
         self,
         context: ExecutionContext,
         model: LoadedModel,
-    ):
+    ) -> DiffusersScheduler:
         scheduler_registry = context.services.get(DiffusersSchedulerRegistry)
 
         scheduler_class = scheduler_registry.resolve(model.info.scheduler.identifier)
@@ -47,7 +47,7 @@ class DiffusersLatentDiffusionModelExecutor (
         embeddings: PromptEmbeddings,
         timestep,
         guidance_scale
-    ):
+    ) -> torch.Tensor:
         runtime_model = model.instance
         unet = runtime_model.unet
         latent_input = torch.cat([latents, latents])
@@ -112,20 +112,35 @@ class DiffusersLatentDiffusionModelExecutor (
         *,
         model: LoadedModel,
         latents
-    ) -> Image:
+    ) -> torch.Tensor:
         runtime_model = model.instance
 
         vae = runtime_model.vae
 
+        # Scale based on the vae (mandatory)
         latents = latents / vae.config.scaling_factor
 
+        # Decode the image (mandatory)
         image = vae.decode(latents).sample
         """
         TODO: I don't know if this must be done always
         or depending or what, but I should pay attention
         and refactor it.
         """
+
+        """
+        The VAE of Stable Diffusion return in the [-1, 1]
+        so we need to transform to [0, 1]. This is
+        specific from the Stable Diffusion.
+        """
         image = (image / 2 + 0.5).clamp(0, 1)
+
+        return image
+
+        """
+        TODO: This is to make the image ready be read as a
+        real image and should be done here.
+        """
         image = image.cpu().permute(0, 2, 3, 1).float().detach().numpy()
         image = Image(image)
 
