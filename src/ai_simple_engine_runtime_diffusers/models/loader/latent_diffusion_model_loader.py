@@ -9,12 +9,17 @@ from ai_simple_engine.models.loaded_model import LoadedModel
 from transformers import CLIPTokenizer, CLIPTextModel
 from diffusers import UNet2DConditionModel, AutoencoderKL
 
-import torch
-
 
 class LatentDiffusionModelLoader(
     ModelLoader
 ):
+    
+    @property
+    def family(
+        self
+    ) -> str:
+        # TODO: Transform into const
+        return 'latent_diffusion'
 
     async def load(
         self,
@@ -27,7 +32,7 @@ class LatentDiffusionModelLoader(
             path,
             subfolder = 'tokenizer',
             torch_dtype = get_torch_dtype_for(device)
-        ).to(str(device))
+        )#.to(str(device))
 
         text_encoder = CLIPTextModel.from_pretrained(
             path,
@@ -47,11 +52,25 @@ class LatentDiffusionModelLoader(
             torch_dtype = get_torch_dtype_for(device)
         ).to(str(device))
 
+        # TODO: This is if I want its own Scheduler
+        # DDIMScheduler.from_pretrained(
+        #     path,
+        #     subfolder = 'scheduler',
+        #     torch_dtype = get_torch_dtype_for(device)
+        # )#.to(str(device))
+
+        # TODO: We had this before but was failing
         scheduler_config = AutoencoderKL.load_config(
-            path,
+            path + '/scheduler/scheduler_config.json',
             subfolder = 'scheduler',
             torch_dtype = get_torch_dtype_for(device)
-        ).to(str(device))
+        )#.to(str(device))
+
+        # Free memory
+        # TODO: Explain why (?)
+        unet.eval()
+        text_encoder.eval()
+        vae.eval()
 
         runtime_model = DiffusersLatentDiffusionModel(
             tokenizer = tokenizer,

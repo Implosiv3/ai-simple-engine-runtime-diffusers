@@ -5,8 +5,10 @@ from diffusers.schedulers.scheduling_utils import SchedulerMixin
 class DiffusersSchedulerRegistry(
     ResolverRegistry[
         str,
-        type[SchedulerMixin]
-    ]
+        type[SchedulerMixin],
+        str
+    ],
+    # Generic[TModel, TExecutor]
 ):
     """
     Class that will register the different

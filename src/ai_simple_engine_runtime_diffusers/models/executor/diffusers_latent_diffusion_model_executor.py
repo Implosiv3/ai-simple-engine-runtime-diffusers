@@ -4,6 +4,7 @@ from ai_simple_engine.execution.execution_context import ExecutionContext
 from ai_simple_engine_runtime_diffusers.models.executor.prompt_embeddings.prompt_embeddings import PromptEmbeddings
 from ai_simple_engine_runtime_diffusers.models.scheduler.registry.diffusers_scheduler_registry import DiffusersSchedulerRegistry
 from ai_simple_engine.models.loaded_model import LoadedModel
+from ai_simple_engine.types.image import Image
 
 import torch
 
@@ -26,9 +27,9 @@ class DiffusersLatentDiffusionModelExecutor (
         context: ExecutionContext,
         model: LoadedModel,
     ):
-        scheduler_registry = context.services.resolve(DiffusersSchedulerRegistry)
+        scheduler_registry = context.services.get(DiffusersSchedulerRegistry)
 
-        scheduler_class = scheduler_registry.resolve(model.info.scheduler.name)
+        scheduler_class = scheduler_registry.resolve(model.info.scheduler.identifier)
 
         scheduler = scheduler_class.from_config(
             model.instance.scheduler_config,
@@ -109,15 +110,23 @@ class DiffusersLatentDiffusionModelExecutor (
     async def decode_latents(
         self,
         *,
-        model,
+        model: LoadedModel,
         latents
-    ):
-        runtime_model = model.model
+    ) -> Image:
+        runtime_model = model.instance
 
         vae = runtime_model.vae
 
         latents = latents / vae.config.scaling_factor
 
         image = vae.decode(latents).sample
+        """
+        TODO: I don't know if this must be done always
+        or depending or what, but I should pay attention
+        and refactor it.
+        """
+        image = (image / 2 + 0.5).clamp(0, 1)
+        image = image.cpu().permute(0, 2, 3, 1).float().detach().numpy()
+        image = Image(image)
 
         return image
