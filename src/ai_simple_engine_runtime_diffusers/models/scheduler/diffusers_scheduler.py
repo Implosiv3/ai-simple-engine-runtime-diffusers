@@ -1,15 +1,20 @@
-from ai_simple_engine_diffusion.scheduler.abstract import Scheduler
-
-
-class DiffusersScheduler(
-    Scheduler
-):
+class DiffusersScheduler:
 
     def __init__(
         self,
         scheduler
     ):
         self._scheduler = scheduler
+
+    @property
+    def init_noise_sigma(
+        self
+    ):
+        """
+        The `gamma` that must be used when starting
+        to create the noise.
+        """
+        return self._scheduler.init_noise_sigma
 
     @property
     def timesteps(

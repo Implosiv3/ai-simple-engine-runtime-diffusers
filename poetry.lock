@@ -2,14 +2,14 @@
 
 [[package]]
 name = "ai-simple-engine"
-version = "0.2.8"
+version = "0.2.9"
 description = "AI Simple Engine"
 optional = false
 python-versions = "<3.12,>=3.10"
 groups = ["main"]
 files = [
-    {file = "ai_simple_engine-0.2.8-py3-none-any.whl", hash = "sha256:5bd4ef3435228df8bd6c4681d1cdf3e7041698eab9adf8f2de8e84ef49245654"},
-    {file = "ai_simple_engine-0.2.8.tar.gz", hash = "sha256:7383dd7ca55a5cd7f44d886ec036a53b3ef40e927b8cdb8690bf5cb630ac1d74"},
+    {file = "ai_simple_engine-0.2.9-py3-none-any.whl", hash = "sha256:f7e25f8ebe9fc53d383ff8d96b9e6db67971a0ce838eadaadfdf986556584d0f"},
+    {file = "ai_simple_engine-0.2.9.tar.gz", hash = "sha256:3a60f55e58ebc7bc8cfed704be1f4d34a93af5626d54510349f553d7d4828e9b"},
 ]
 
 [[package]]
@@ -26,18 +26,18 @@ files = [
 
 [[package]]
 name = "ai-simple-engine-diffusion"
-version = "0.0.3"
+version = "0.0.4"
 description = "AI Simple Engine Diffusion Module"
 optional = false
 python-versions = "<3.12,>=3.10"
 groups = ["main"]
 files = [
-    {file = "ai_simple_engine_diffusion-0.0.3-py3-none-any.whl", hash = "sha256:00fc8a5f4d11f0bfafb21c65ab66f53b3ea1f5fb680b7bd540b7a5adbae14f33"},
-    {file = "ai_simple_engine_diffusion-0.0.3.tar.gz", hash = "sha256:9a96a7d269670cfd4a580c22470a087709b3453a1a953f53c7b4930bd2ae80b8"},
+    {file = "ai_simple_engine_diffusion-0.0.4-py3-none-any.whl", hash = "sha256:c5587caf973bf273b1c0b7c6e7b2ac7d9da1c2ef2865c7c62660088b7508a32f"},
+    {file = "ai_simple_engine_diffusion-0.0.4.tar.gz", hash = "sha256:f7590d7cfad04de7ebbee49921541c9dabcb8cec5a14c22401917db1efbf979a"},
 ]
 
 [package.dependencies]
-ai-simple-engine = ">=0.2.8,<1.0.0"
+ai-simple-engine = ">=0.2.9,<1.0.0"
 ai-simple-engine-common = ">=0.0.3,<1.0.0"
 
 [[package]]
@@ -1367,4 +1367,4 @@ type = ["pytest-mypy (>=1.0.1) ; platform_python_implementation != \"PyPy\""]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.12"
-content-hash = "3e601ae6579fe03d5177c8335d76b8f3e1b1cb0133bc37377845960997080bc5"
+content-hash = "bbbb8374885f2ff723f03bf9a0c0458e3ea2ebccb6e51e67296b9421e5225ef4"
