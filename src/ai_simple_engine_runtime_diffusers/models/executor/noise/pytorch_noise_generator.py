@@ -6,6 +6,9 @@ import torch
 class TorchNoiseGenerator(
     NoiseGenerator
 ):
+    """
+    Class to generate random noise using `torch`.
+    """
 
     async def generate(
         self,

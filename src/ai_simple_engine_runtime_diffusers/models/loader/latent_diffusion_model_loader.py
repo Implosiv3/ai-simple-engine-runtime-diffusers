@@ -1,6 +1,7 @@
 from ai_simple_engine_runtime_diffusers.models.runtime.diffusers_latent_diffusion_model import DiffusersLatentDiffusionModel
 from ai_simple_engine_runtime_diffusers.models.runtime.utils import get_torch_dtype_for
 from ai_simple_engine_diffusion.model.info.diffusion_model_info import DiffusionModelInfo
+from ai_simple_engine_diffusion.model.info.tensor_output_spec import TensorOutputSpec
 from ai_simple_engine_diffusion.scheduler.spec.base import SchedulerSpec
 from ai_simple_engine.device.base import Device
 from ai_simple_engine.models.loaders.abstract import ModelLoader
@@ -84,7 +85,11 @@ class LatentDiffusionModelLoader(
             latent_channels = unet.config.in_channels,
             vae_scale_factor = 2 ** (len(vae.config.block_out_channels) - 1),
             # TODO: Make dynamic depending on the 'installed_model'
-            scheduler = self._default_scheduler(installed_model)
+            scheduler = self._default_scheduler(installed_model),
+            # TODO: Is this ok (?)
+            tensor_output_spec = TensorOutputSpec(
+                value_range = (-1.0, 1.0)
+            )
         )
 
         return LoadedModel(

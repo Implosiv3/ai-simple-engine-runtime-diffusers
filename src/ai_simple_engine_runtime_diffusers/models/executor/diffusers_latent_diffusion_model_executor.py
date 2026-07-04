@@ -133,7 +133,11 @@ class DiffusersLatentDiffusionModelExecutor (
         so we need to transform to [0, 1]. This is
         specific from the Stable Diffusion.
         """
-        image = (image / 2 + 0.5).clamp(0, 1)
+        image = self._normalize_image(
+            image = image,
+            model = model
+        )
+        # image = (image / 2 + 0.5).clamp(0, 1)
 
         return image
 
@@ -145,3 +149,29 @@ class DiffusersLatentDiffusionModelExecutor (
         image = Image(image)
 
         return image
+    
+    # TODO: Maybe rename to '_normalize_tensor' (?)
+    def _normalize_image(
+        self,
+        image: torch.Tensor,
+        model: LoadedModel
+    ) -> torch.Tensor:
+        """
+        *For internal use only*
+
+        Normalize the `image` provided according to
+        the specifications in the information of the
+        `model` given.
+        """
+        minimum, maximum = model.info.tensor_output_spec.value_range
+
+        if (minimum, maximum) == (-1.0, 1.0):
+            image = (image + 1.0) / 2.0
+            # Previously:
+            # image = (image / 2 + 0.5)
+        elif (minimum, maximum) == (0.0, 1.0):
+            pass
+        else:
+            image = (image - minimum) / (maximum - minimum)
+
+        return image.clamp(0.0, 1.0)
